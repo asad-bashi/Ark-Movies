@@ -6,6 +6,7 @@ import "../Components/MoviePoster";
 import axios from "axios";
 import "./Home.css";
 import MoviePoster from "../Components/MoviePoster";
+import MediaRow from "../Components/MediaRow";
 const API_KEY = "9f3a9d362ac316e4573a58e1556d4bfe";
 
 const baseUrl = "https://api.themoviedb.org/3/";
@@ -40,13 +41,16 @@ function Home() {
   }, []);
 
   return (
-    <Box height="100vh" bgcolor={grey[900]}>
-      <Carousel>
+    <Box bgcolor={grey[900]}>
+      <Carousel className="Carousel">
         {nowPlaying.map(({ poster_path }) => (
           <MoviePoster movieImg={poster_path} />
         ))}
       </Carousel>
-      <div>hello</div>
+
+      <MediaRow title="Popular" movies={popular} />
+      <MediaRow title="Top Rated" movies={topRated} />
+      <MediaRow title="Up Coming" movies={upComing} />
     </Box>
   );
 }
