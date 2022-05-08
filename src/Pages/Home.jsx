@@ -48,9 +48,14 @@ function Home() {
         ))}
       </Carousel>
 
-      <MediaRow title="Popular" movies={popular} />
-      <MediaRow title="Top Rated" movies={topRated} />
-      <MediaRow title="Up Coming" movies={upComing} />
+      <Box
+        component="main"
+        sx={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}
+      >
+        <MediaRow title="Popular" movies={popular} />
+        <MediaRow title="Top Rated" movies={topRated} />
+        <MediaRow title="Up Coming" movies={upComing} />
+      </Box>
     </Box>
   );
 }

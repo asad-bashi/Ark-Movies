@@ -1,7 +1,8 @@
 .MediaRow {
   width: 100%;
+  margin: 0 auto;
 }
 
-.movie-img {
-  width: 25%;
+img {
+  width: 500px;
 }
