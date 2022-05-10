@@ -1,15 +1,18 @@
 .MovieCard {
-  border: 2px solid red;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-  position: absolute;
-  right: 50%;
-  background-color: red;
+  text-align: center;
+  
   font-size: 26px;
+}
+
+.rating {
+  background-color: pink;
+  border: 2px solid green;
 }
 .MovieCard:hover {
   cursor: pointer;
 }
-

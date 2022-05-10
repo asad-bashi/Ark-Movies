@@ -51,7 +51,7 @@ function Home() {
 
       <Box
         component="main"
-        sx={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}
+        sx={{ display: "flex", flexDirection: "column", rowGap: "3rem" }}
       >
         <MediaRow title="Popular" movies={popular} />
         <MediaRow title="Top Rated" movies={topRated} />
