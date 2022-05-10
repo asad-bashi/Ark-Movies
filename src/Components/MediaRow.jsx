@@ -1,4 +1,6 @@
 import { Box, Typography } from "@mui/material";
+import MovieCard from "./MovieCard";
+import { v4 as uuidv4 } from "uuid";
 import "./MediaRow.css";
 const imgUrl = "https://image.tmdb.org/t/p/w500";
 function MediaRow({ title, movies }) {
@@ -7,11 +9,12 @@ function MediaRow({ title, movies }) {
       <Typography variant="h2" sx={{ color: "white" }}>
         {title}
       </Typography>
-      <Box sx={{ display: "flex", overflowX: "scroll", width: "100%" }}>
+      <Box sx={{ display: "flex", overflowX: "scroll", columnGap: "1rem" }}>
         {movies.map((movie) => (
-          <Box sx={{mx:2}}>
-            <img src={`${imgUrl}${movie.backdrop_path}`} alt="" />
-          </Box>
+          <MovieCard
+            key={uuidv4()}
+            img={`${imgUrl}${movie.backdrop_path}`}
+          ></MovieCard>
         ))}
       </Box>
     </Box>

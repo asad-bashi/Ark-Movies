@@ -7,6 +7,7 @@ import axios from "axios";
 import "./Home.css";
 import MoviePoster from "../Components/MoviePoster";
 import MediaRow from "../Components/MediaRow";
+import { v4 as uuidv4 } from "uuid";
 const API_KEY = "9f3a9d362ac316e4573a58e1556d4bfe";
 
 const baseUrl = "https://api.themoviedb.org/3/";
@@ -44,7 +45,7 @@ function Home() {
     <Box bgcolor={grey[900]}>
       <Carousel className="Carousel">
         {nowPlaying.map(({ poster_path }) => (
-          <MoviePoster movieImg={poster_path} />
+          <MoviePoster key={uuidv4()} movieImg={poster_path} />
         ))}
       </Carousel>
 
