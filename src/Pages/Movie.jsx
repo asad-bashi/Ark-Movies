@@ -10,6 +10,11 @@ import "./Movie.css";
 import MovieBackDrop from "../Components/MovieBackDrop";
 import Genre from "../Components/Genre";
 import CastMember from "../Components/CastMember";
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from "react-html-parser";
 
 const API_KEY = "9f3a9d362ac316e4573a58e1556d4bfe";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -65,10 +70,18 @@ function Movie() {
       //use key as id value for youtube api
 
       const res = await axios.get(
-        `https://www.googleapis.com/youtube/v3/videos?part=player&id=9djAMds545g&key=AIzaSyCT0kk3iZmgkglVvj4iyFh63n0EfyOIREI`
+        `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`
       );
+
+      const videoId = res.data.results[0].key;
+
       console.log(res);
-      setVideo(res);
+
+      const { data } = await axios.get(
+        `https://www.googleapis.com/youtube/v3/videos?part=player&id=${videoId}&key=AIzaSyCT0kk3iZmgkglVvj4iyFh63n0EfyOIREI`
+      );
+      console.log(data);
+      setVideo(data.items);
     }
     getVideos();
   }, []);
@@ -127,14 +140,9 @@ function Movie() {
       </section>
 
       <section className="Movie-Video">
-        <iframe
-          width="480"
-          height="270"
-          src="//www.youtube.com/embed/9djAMds545g"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\"
-          allowfullscreen
-        ></iframe>
+        {video.map((v) =>
+          ReactHtmlParser(v.player?.embedHtml.replace("\\", ""))
+        )}
       </section>
 
       {/* <div className="Movie-Genres">
