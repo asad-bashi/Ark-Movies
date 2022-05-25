@@ -30,6 +30,7 @@ function Movie() {
   const [test, setTest] = useState([]);
 
   useEffect(() => {
+    //have language filter
     async function getImages() {
       const { data } = await axios.get(
         `${BASE_URL}/movie/${id}/images?api_key=${API_KEY}`
@@ -69,22 +70,16 @@ function Movie() {
       //get video key from tdmb api
       //use key as id value for youtube api
 
-      const res = await axios.get(
+      const { data } = await axios.get(
         `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`
       );
 
-      const videoId = res.data.results[0].key;
+      const videoKey = data.results[0].key;
 
-      console.log(res);
-
-      const { data } = await axios.get(
-        `https://www.googleapis.com/youtube/v3/videos?part=player&id=${videoId}&key=AIzaSyCT0kk3iZmgkglVvj4iyFh63n0EfyOIREI`
-      );
-      console.log(data);
-      setVideo(data.items);
+      setVideo(videoKey);
     }
     getVideos();
-  }, []);
+  }, [id]);
 
   return (
     <Box sx={{ backgroundColor: grey[900] }}>
@@ -140,39 +135,13 @@ function Movie() {
       </section>
 
       <section className="Movie-Video">
-        {video.map((v) =>
-          ReactHtmlParser(v.player?.embedHtml.replace("\\", ""))
-        )}
+        <iframe
+          className="iframe"
+          src={`//www.youtube.com/embed/${video}`}
+          frameborder="0"
+          allowFullScreen
+        ></iframe>
       </section>
-
-      {/* <div className="Movie-Genres">
-          {movie.genres?.map(({ name }) => (
-            <Box>{name}</Box>
-          ))}
-        </div>
-        <div className="Movie-Bio">{movie.overview}</div> */}
-
-      {/* <div className="Interactive-buttons">
-        <button className="btn play">
-          <PlayArrowIcon />
-          <p>Play</p>
-        </button>
-
-        <button className="btn trailer">
-          <PlayArrowIcon />
-          <p>Trailer</p>
-        </button>
-
-        <AddIcon
-          sx={{
-            fontSize: "2rem",
-            color: "white",
-            backgroundColor: "black",
-            border: "1px solid white",
-            borderRadius: "50%",
-          }}
-        />
-      </div> */}
     </Box>
   );
 }
