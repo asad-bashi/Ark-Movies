@@ -9,6 +9,7 @@ import MoviePoster from "../Components/MoviePoster";
 import MediaRow from "../Components/MediaRow";
 import { v4 as uuidv4 } from "uuid";
 import Header from "../Components/Header";
+import apiConfig from "../apiConfig";
 const API_KEY = "9f3a9d362ac316e4573a58e1556d4bfe";
 
 const baseUrl = "https://api.themoviedb.org/3/";
@@ -23,6 +24,8 @@ function Home() {
         `${baseUrl}movie/now_playing?api_key=${API_KEY}`
       );
       setNowPlaying(nowPlaying.data.results);
+
+      
 
       const popular = await axios.get(
         `${baseUrl}movie/popular?api_key=${API_KEY}`
