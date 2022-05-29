@@ -19,10 +19,10 @@ function Home() {
   const [upComing, setUpComing] = useState([]);
   useEffect(() => {
     async function getMovies() {
-      // const nowPlaying = await axios.get(
-      //   `${baseUrl}movie/now_playing?api_key=${API_KEY}`
-      // );
-      // setNowPlaying(nowPlaying.data.results);
+      const nowPlaying = await axios.get(
+        `${baseUrl}movie/now_playing?api_key=${API_KEY}`
+      );
+      setNowPlaying(nowPlaying.data.results);
 
       
 
