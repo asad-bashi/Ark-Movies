@@ -1,0 +1,26 @@
+.MediaRow {
+  overflow-x: auto;
+}
+
+.Movie-Info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  width: 85%;
+  margin: 0 auto;
+  opacity: 0;
+  transition: 200ms;
+  margin-bottom: 1rem;
+  border: 2px solid yellow;
+}
+
+.MovieCard:hover .Movie-Info {
+  opacity: 1;
+}
+
+.Movie-Name {
+  font-size: 1.3rem;
+
+  font-weight: 500;
+}

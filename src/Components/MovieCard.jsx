@@ -25,7 +25,6 @@
 
 // export default MovieCard;
 
-
 import styled from "styled-components";
 
 const MovieCard = styled.div`
@@ -35,7 +34,10 @@ const MovieCard = styled.div`
   background-repeat: no-repeat;
   min-width: 500px;
   height: 287px;
-  flex-shrink: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
 `;
 
 export default MovieCard;
