@@ -27,19 +27,17 @@ function Movie() {
   const [cast, setCast] = useState([]);
   const [video, setVideo] = useState([]);
 
-  const [test, setTest] = useState([]);
-
   useEffect(() => {
     //have language filter
     async function getImages() {
       const { data } = await axios.get(
         `${BASE_URL}/movie/${id}/images?api_key=${API_KEY}`
       );
+     
 
+      //use original size backdrops and posters
       setBackdrop(data.backdrops[3]);
       setPoster(data.posters[1]);
-
-      setTest(data);
     }
     getImages();
 
@@ -47,6 +45,7 @@ function Movie() {
       const { data } = await axios.get(
         `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
       );
+       console.log(data);
 
       setMovie(data);
     }
@@ -67,9 +66,6 @@ function Movie() {
     getCast();
 
     async function getVideos() {
-      //get video key from tdmb api
-      //use key as id value for youtube api
-
       const { data } = await axios.get(
         `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`
       );
@@ -83,28 +79,21 @@ function Movie() {
 
   return (
     <Box sx={{ backgroundColor: grey[900] }}>
-      {/* <MovieBackDrop
-        file_path={`https://image.tmdb.org/t/p/w500/${backdrop.file_path}`}
-      /> */}
+      {/*replace box with div classname movie */}
+      {/* fix Header.jsx and include it here */}
+
+      {/*use original size for backdrop and have it behind content */}
       <div className="Movie-BackDrop">
         <img
           height={"850px"}
-          src={`https://image.tmdb.org/t/p/w500/${backdrop.file_path}`}
+          src={`https://image.tmdb.org/t/p/w500/${backdrop?.file_path}`} //use poster but keep backdrop naming
         />
       </div>
-
-      {/* {test.backdrops?.map((t) => (
-        <img
-          height={'400px'}
-          width={'80%'}
-          src={`https://image.tmdb.org/t/p/w500/${t.file_path}`}
-        />
-      ))} */}
 
       <section className="Movie-Information">
         <div className="Movie-Poster">
           <img
-            src={`https://image.tmdb.org/t/p/w500/${poster.file_path}`}
+            src={`https://image.tmdb.org/t/p/w500/${poster?.file_path}`}
             alt=""
           />
         </div>
@@ -138,10 +127,11 @@ function Movie() {
         <iframe
           className="iframe"
           src={`//www.youtube.com/embed/${video}`}
-          frameborder="0"
+          frameBorder="0"
           allowFullScreen
         ></iframe>
       </section>
+      {/* include footer here */}
     </Box>
   );
 }

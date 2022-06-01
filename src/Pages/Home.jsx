@@ -9,11 +9,12 @@ import MoviePoster from "../Components/MoviePoster";
 import MediaRow from "../Components/MediaRow";
 import { v4 as uuidv4 } from "uuid";
 import Header from "../Components/Header";
-import apiConfig from "../apiConfig";
+import HomeIcon from "@mui/icons-material/Home";
+import AddIcon from "@mui/icons-material/Add";
 const API_KEY = "9f3a9d362ac316e4573a58e1556d4bfe";
-
 const baseUrl = "https://api.themoviedb.org/3/";
 function Home() {
+  // have 1 array for movies and each new set of movies gets added to array
   const [nowPlaying, setNowPlaying] = useState([]);
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([]);
@@ -24,8 +25,6 @@ function Home() {
         `${baseUrl}movie/now_playing?api_key=${API_KEY}`
       );
       setNowPlaying(nowPlaying.data.results);
-
-      
 
       const popular = await axios.get(
         `${baseUrl}movie/popular?api_key=${API_KEY}`
@@ -47,31 +46,24 @@ function Home() {
 
   return (
     <Box bgcolor={grey[900]}>
-      <Header>
-        <div className="container">
-          <div>logo</div>
+      {/* replace box for div */}
+      <Header />
 
-          <ul>
-            <li>Home</li>
-            <li>WatchList</li>
-            <li>Search</li>
-          </ul>
-        </div>
-      </Header>
       <Carousel className="Carousel">
+        {/*make full poster img fit in container*/}
         {nowPlaying.map(({ poster_path }) => (
-          <MoviePoster key={uuidv4()} movieImg={poster_path} />
+          <MoviePoster key={uuidv4()} poster_path={poster_path} />
         ))}
       </Carousel>
 
-      <Box
-        component="main"
-        sx={{ display: "flex", flexDirection: "column", rowGap: "3rem" }}
-      >
+      <div className="MediaRow-Container">
+        {/* make each movie card hover effect border effect and give elevation/boxshadow */}
+
+        {/* fix title for each MediaRow on scroll */}
         <MediaRow title="Popular" movies={popular} />
         <MediaRow title="Top Rated" movies={topRated} />
         <MediaRow title="Up Coming" movies={upComing} />
-      </Box>
+      </div>
     </Box>
   );
 }

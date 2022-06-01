@@ -1,14 +1,18 @@
 import styled from "styled-components";
-const imgUrl = "https://image.tmdb.org/t/p/w500";
+import apiConfig from "../apiConfig";
+const baseUrl = apiConfig.images.base_url;
+const imgSize = "original";
+// const imgUrl = "https://image.tmdb.org/t/p/w500";
 const MoviePoster = styled.div`
-  width: 750px;
+  width: 100vw;
   height: 100vh;
-  border: 5px solid red;
-  background-image: url(${(props) => `${imgUrl}${props.movieImg}`});
+  background-image: url(${(props) => `${baseUrl}${imgSize}${props.poster_path}`});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
 `;
+
+
 
 export default MoviePoster;

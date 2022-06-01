@@ -8,8 +8,6 @@ const imgUrl = "https://image.tmdb.org/t/p/w500";
 function MediaRow({ title, movies }) {
   const navigate = useNavigate();
 
-  console.log(movies);
-
   return (
     <Box className="MediaRow">
       <Typography variant="h2" sx={{ color: "white" }}>
@@ -33,17 +31,6 @@ function MediaRow({ title, movies }) {
                   size="large"
                 />
               </div>
-              {/* <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  height: "100%",
-                }}
-              >
-                <h1>title</h1>
-                <p>rating</p>
-              </Box> */}
             </MovieCard>
           </Paper>
         ))}
