@@ -9,7 +9,7 @@ const MoviePoster = styled.div`
   background-image: url(${(props) => `${baseUrl}${imgSize}${props.poster_path}`});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 51%;
   cursor: pointer;
 `;
 

@@ -50,7 +50,7 @@ function Home() {
       <Header />
 
       <Carousel className="Carousel">
-        {/*make full poster img fit in container*/}
+        {/*take user to movie onclick for posters as well*/}
         {nowPlaying.map(({ poster_path }) => (
           <MoviePoster key={uuidv4()} poster_path={poster_path} />
         ))}
