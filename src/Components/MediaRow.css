@@ -1,5 +1,7 @@
 .MediaRow {
   overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0;
 }
 
 .Movie-Info {
@@ -18,11 +20,6 @@
 }
 
 
-.MovieCard:hover .Movie-Info {
-  opacity: 1;
-  transform: scale(1);
-  transform: translateY(0px);
-}
 
 .Movie-Name {
   font-size: 1.3rem;

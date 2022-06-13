@@ -1,0 +1,21 @@
+.Footer {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 6rem;
+  column-gap: 4rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin-top: auto;
+}
+
+.List-Title {
+  font-weight: 500;
+  color: #eeeeee;
+  border: 2px solid #b71c1c;
+  list-style-type: none;
+  font-size: 1.5rem;
+}
+
+.List-Item {
+  color: #757575;
+}

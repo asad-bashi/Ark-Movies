@@ -3,7 +3,8 @@ import axios from "axios";
 import { Box, Typography, Button } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useEffect, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import "../Components/MovieBackDrop";
 import "./Movie.css";
@@ -15,17 +16,19 @@ import ReactHtmlParser, {
   convertNodeToElement,
   htmlparser2,
 } from "react-html-parser";
+import Navbar from "../Components/Navbar";
 
 const API_KEY = "9f3a9d362ac316e4573a58e1556d4bfe";
 const BASE_URL = "https://api.themoviedb.org/3";
 
-function Movie() {
+function Movie({ setWatchList, watchList }) {
   const { id } = useParams();
   const [backdrop, setBackdrop] = useState({});
   const [poster, setPoster] = useState({});
   const [movie, setMovie] = useState({});
   const [cast, setCast] = useState([]);
   const [video, setVideo] = useState([]);
+  const [isWatchListed, setWatchListed] = useState(false);
 
   useEffect(() => {
     //have language filter
@@ -33,11 +36,9 @@ function Movie() {
       const { data } = await axios.get(
         `${BASE_URL}/movie/${id}/images?api_key=${API_KEY}`
       );
-     
 
-      //use original size backdrops and posters
-      setBackdrop(data.backdrops[3]);
-      setPoster(data.posters[1]);
+      setBackdrop(data.backdrops[0]);
+      setPoster(data.posters[0]);
     }
     getImages();
 
@@ -45,7 +46,6 @@ function Movie() {
       const { data } = await axios.get(
         `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
       );
-       console.log(data);
 
       setMovie(data);
     }
@@ -75,20 +75,44 @@ function Movie() {
       setVideo(videoKey);
     }
     getVideos();
+
+    function isWatchListed() {
+      const isValid = watchList.some((movie) => movie.id === parseInt(id));
+      console.log(isValid);
+      setWatchListed(isValid);
+    }
+    isWatchListed();
+  }, [id, watchList]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, [id]);
 
+  function addToWatchList() {
+    setWatchList((prevWatchList) => [...prevWatchList, movie]);
+    setWatchListed(true);
+    console.log(watchList);
+  }
+
+  function removeFromWatchList(){
+    const newWatchList = watchList.filter((movie)=> movie.id!== parseInt(id));
+    setWatchList(newWatchList)
+  }
+
   return (
-    <Box sx={{ backgroundColor: grey[900] }}>
+    <div className="Movie">
       {/*replace box with div classname movie */}
       {/* fix Header.jsx and include it here */}
 
       {/*use original size for backdrop and have it behind content */}
-      <div className="Movie-BackDrop">
+      {/* <div className="Movie-BackDrop">
         <img
           height={"850px"}
           src={`https://image.tmdb.org/t/p/w500/${backdrop?.file_path}`} //use poster but keep backdrop naming
         />
-      </div>
+      </div> */}
+      <Navbar />
+
+      <MovieBackDrop file_path={backdrop?.file_path} />
 
       <section className="Movie-Information">
         <div className="Movie-Poster">
@@ -100,10 +124,19 @@ function Movie() {
         <Box sx={{ padding: "1rem" }}>
           <h1 className="Movie-Title">{movie.title}</h1>
 
-          <div>
+          <div className="genre-container">
             {movie.genres?.map((g) => (
               <Genre>{g.name}</Genre>
             ))}
+            {isWatchListed ? (
+              <RemoveCircleOutlineIcon sx={{ color: "#b71c1c", fontSize: "3.7rem", ml: ".5rem", cursor:'pointer' }} onClick={removeFromWatchList} />
+            ) : (
+              <AddCircleIcon sx={{ color: "#b71c1c", fontSize: "3.7rem", ml: ".5rem",cursor:'pointer' }} onClick={addToWatchList} />
+            )}
+
+            {/* <AddCircleIcon
+              sx={{ color: "#b71c1c", fontSize: "3.7rem", ml: ".5rem" }}
+            /> */}
           </div>
           <p className="Movie-OverView">{movie.overview}</p>
 
@@ -124,6 +157,7 @@ function Movie() {
       </section>
 
       <section className="Movie-Video">
+        <p className="Trailer">Trailer</p>
         <iframe
           className="iframe"
           src={`//www.youtube.com/embed/${video}`}
@@ -132,7 +166,7 @@ function Movie() {
         ></iframe>
       </section>
       {/* include footer here */}
-    </Box>
+    </div>
   );
 }
 

@@ -1,0 +1,26 @@
+.WatchList {
+  background-color: hsl(0, 0%, 8%);
+  min-height: 100vh;
+}
+
+.WatchList-Container {
+  width: 80%;
+  
+  margin: 0 auto;
+}
+
+.WatchList-Title {
+  color: white;
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 1.55rem 0;
+}
+
+.WatchList-Movies {
+  margin: 0 auto;
+
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.5rem;
+}

@@ -5,16 +5,15 @@ const MovieCard = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-width: 475px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow-y: hidden;
+  width: 375px;
+  height: 200px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: 200ms ease-in-out;
   cursor: pointer;
-  /* &:hover {
-    border: 3px solid #b71c1c;
-  } */
+  &:hover {
+    transform: scale(1.1);
+    border: 4px solid #b71c1c;
+  }
 `;
 
 export default MovieCard;
