@@ -16,11 +16,12 @@ function MediaRow({ title, movies }) {
       </Typography>
       <Box sx={{ display: "flex", columnGap: "1.5rem" }}>
         {movies.map((movie) => (
-          <Paper onClick={() => navigate(`/movie/${movie.id}`)} elevation={12}>
+          <Paper elevation={12}>
             <MovieCard
               className="MovieCard"
               key={uuidv4()}
               img={`${imgUrl}${movie.backdrop_path}`}
+              id={movie.id}
             ></MovieCard>
           </Paper>
         ))}

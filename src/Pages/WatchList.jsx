@@ -7,7 +7,7 @@ import apiConfig from "../apiConfig";
 const baseUrl = apiConfig.images.base_url;
 const imgSize = "original";
 function WatchList(props) {
-  console.log(props);
+
   return (
     <div className="WatchList">
       <Navbar />
@@ -15,7 +15,7 @@ function WatchList(props) {
         <h2 className="WatchList-Title">WatchList</h2>
         <div className="WatchList-Movies">
           {props.watchlist.map((movie) => (
-            <MovieCard img={`${baseUrl}${imgSize}/${movie.backdrop_path}`} />
+            <MovieCard id={movie.id} img={`${baseUrl}${imgSize}/${movie.backdrop_path}`} />
           ))}
         </div>
       </div>

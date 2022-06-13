@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-const MovieCard = styled.div`
+const MovieCardContainer = styled.div`
   background-image: url(${(props) => props.img});
   background-size: cover;
   background-position: center;
@@ -15,5 +16,11 @@ const MovieCard = styled.div`
     border: 4px solid #b71c1c;
   }
 `;
+
+function MovieCard({id,img}){
+  const navigate = useNavigate();
+  return <MovieCardContainer img={img} onClick={() => navigate(`/movie/${id}`)} />
+
+}
 
 export default MovieCard;
