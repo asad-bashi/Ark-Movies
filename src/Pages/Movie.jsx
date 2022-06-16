@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Box, Typography, Button } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -126,7 +127,7 @@ function Movie({ setWatchList, watchList }) {
 
           <div className="genre-container">
             {movie.genres?.map((g) => (
-              <Genre>{g.name}</Genre>
+              <Genre key={uuidv4()}>{g.name}</Genre>
             ))}
             {isWatchListed ? (
               <RemoveCircleOutlineIcon sx={{ color: "#b71c1c", fontSize: "3.7rem", ml: ".5rem", cursor:'pointer' }} onClick={removeFromWatchList} />
@@ -143,7 +144,7 @@ function Movie({ setWatchList, watchList }) {
           <h2 className="Movie-Cast-Title">Casts</h2>
           <div className="Movie-Cast">
             {cast.map((c) => (
-              <div className="Cast-Member">
+              <div key={uuidv4()} className="Cast-Member">
                 <img
                   className="Movie-CastMember"
                   src={`https://image.tmdb.org/t/p/w500/${c.profile_path}`}

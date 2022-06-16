@@ -22,7 +22,8 @@ function MediaRow({ title, movies }) {
               key={uuidv4()}
               img={`${imgUrl}${movie.backdrop_path}`}
               id={movie.id}
-            ></MovieCard>
+              
+            />
           </Paper>
         ))}
       </Box>

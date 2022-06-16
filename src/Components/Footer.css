@@ -1,21 +1,47 @@
 .Footer {
   background-color: black;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   padding: 4rem 6rem;
-  column-gap: 4rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   margin-top: auto;
+  user-select: none;
+}
+
+.List {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.55rem;
 }
 
 .List-Title {
   font-weight: 500;
   color: #eeeeee;
-  border: 2px solid #b71c1c;
+  border-bottom: 3px solid #b71c1c;
+  border-radius: 2px;
   list-style-type: none;
   font-size: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .List-Item {
   color: #757575;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: 200ms;
+}
+
+.List-Item:hover {
+  color: #b71c1c;
+  cursor: pointer;
+}
+
+.Socials {
+  display: flex;
+  column-gap: 0.55rem;
+}
+
+.Icon {
+  cursor: pointer;
 }

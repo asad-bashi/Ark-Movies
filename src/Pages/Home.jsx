@@ -1,7 +1,5 @@
-import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import Carousel from "react-elastic-carousel";
-import { grey } from "@mui/material/colors";
 import "../Components/MoviePoster";
 import axios from "axios";
 import "./Home.css";
@@ -54,7 +52,6 @@ function Home() {
       <Navbar />
 
       <Carousel className="Carousel">
-        {/*take user to movie onclick for posters as well*/}
         {nowPlaying.map(({ poster_path, id }) => (
           <MoviePoster
             onClick={() => navigate(`/movie/${id}`)}
@@ -65,14 +62,13 @@ function Home() {
       </Carousel>
 
       <div className="MediaRow-Container">
-        {/* make each movie card hover effect border effect and give elevation/boxshadow */}
-
         {/* fix title for each MediaRow on scroll */}
         <MediaRow title="Popular" movies={popular} />
         <MediaRow title="Top Rated" movies={topRated} />
         <MediaRow title="Up Coming" movies={upComing} />
       </div>
-      
+
+      <Footer />
     </div>
   );
 }

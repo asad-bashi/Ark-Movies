@@ -7,7 +7,6 @@ const Genre = styled.span`
   padding: 0.75rem 1.45rem;
   border-radius: 12px;
   outline: none;
-  border: 2px solid black;
   color: black;
   background-color: #b71c1c;
   user-select: none;

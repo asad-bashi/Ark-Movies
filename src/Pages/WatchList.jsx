@@ -1,5 +1,6 @@
 import Navbar from "../Components/Navbar";
 import MovieCard from "../Components/MovieCard";
+import { v4 as uuidv4 } from "uuid";
 import Footer from "../Components/Footer";
 
 import "./WatchList.css";
@@ -15,7 +16,7 @@ function WatchList(props) {
         <h2 className="WatchList-Title">WatchList</h2>
         <div className="WatchList-Movies">
           {props.watchlist.map((movie) => (
-            <MovieCard id={movie.id} img={`${baseUrl}${imgSize}/${movie.backdrop_path}`} />
+            <MovieCard key={uuidv4()} id={movie.id} img={`${baseUrl}${imgSize}/${movie.backdrop_path}`} />
           ))}
         </div>
       </div>
