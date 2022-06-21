@@ -91,12 +91,11 @@ function Movie({ setWatchList, watchList }) {
   function addToWatchList() {
     setWatchList((prevWatchList) => [...prevWatchList, movie]);
     setWatchListed(true);
-    console.log(watchList);
   }
 
-  function removeFromWatchList(){
-    const newWatchList = watchList.filter((movie)=> movie.id!== parseInt(id));
-    setWatchList(newWatchList)
+  function removeFromWatchList() {
+    const newWatchList = watchList.filter((movie) => movie.id !== parseInt(id));
+    setWatchList(newWatchList);
   }
 
   return (
@@ -130,9 +129,25 @@ function Movie({ setWatchList, watchList }) {
               <Genre key={uuidv4()}>{g.name}</Genre>
             ))}
             {isWatchListed ? (
-              <RemoveCircleOutlineIcon sx={{ color: "#b71c1c", fontSize: "3.7rem", ml: ".5rem", cursor:'pointer' }} onClick={removeFromWatchList} />
+              <RemoveCircleOutlineIcon
+                sx={{
+                  color: "#b71c1c",
+                  fontSize: "3.7rem",
+                  ml: ".5rem",
+                  cursor: "pointer",
+                }}
+                onClick={removeFromWatchList}
+              />
             ) : (
-              <AddCircleIcon sx={{ color: "#b71c1c", fontSize: "3.7rem", ml: ".5rem",cursor:'pointer' }} onClick={addToWatchList} />
+              <AddCircleIcon
+                sx={{
+                  color: "#b71c1c",
+                  fontSize: "3.7rem",
+                  ml: ".5rem",
+                  cursor: "pointer",
+                }}
+                onClick={addToWatchList}
+              />
             )}
 
             {/* <AddCircleIcon
