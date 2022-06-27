@@ -4,7 +4,7 @@ import Footer from "../Components/Footer";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect } from "react";
 import "./WatchList.css";
-const imgSize = "original";
+const imgSize = "w500";
 function WatchList(props) {
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -19,7 +19,7 @@ function WatchList(props) {
             <MovieCard
               key={uuidv4()}
               id={movie.id}
-              img={`${process.env.REACT_APP_BASE_URL}${imgSize}/${movie.backdrop_path}`}
+              img={`${process.env.REACT_APP_IMG_URL}${imgSize}/${movie.backdrop_path}`}
             />
           ))}
         </div>

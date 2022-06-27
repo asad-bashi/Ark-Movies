@@ -20,6 +20,7 @@ function Movie({ setWatchList, watchList }) {
   const [cast, setCast] = useState([]);
   const [video, setVideo] = useState([]);
   const [isWatchListed, setWatchListed] = useState(false);
+  const imgSize = "w500";
 
   useEffect(() => {
     async function getImages() {
@@ -94,12 +95,11 @@ function Movie({ setWatchList, watchList }) {
   return (
     <div className="Movie">
       <Navbar />
-      {/*add overlay over backdrop black tint */}
       <MovieBackDrop file_path={backdrop?.file_path} />
       <section className="Movie-Information">
         <div className="Movie-Poster">
           <img
-            src={`${process.env.REACT_APP_IMG_URL}w500/${poster?.file_path}`}
+            src={`${process.env.REACT_APP_IMG_URL}${imgSize}/${poster?.file_path}`}
             alt=""
           />
         </div>
