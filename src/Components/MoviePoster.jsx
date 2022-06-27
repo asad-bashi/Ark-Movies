@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import apiConfig from "../apiConfig";
-const baseUrl = apiConfig.images.base_url;
 const imgSize = "original";
 const MoviePoster = styled.div`
   width: 37vw;
   height: 100vh;
   background-image: url(${(props) =>
-    `${baseUrl}${imgSize}${props.poster_path}`});
+    `${process.env.REACT_APP_IMG_URL}${imgSize}${props.poster_path}`});
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;

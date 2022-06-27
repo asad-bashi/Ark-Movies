@@ -10,11 +10,9 @@ function MediaRow({ title, movies }) {
   const navigate = useNavigate();
 
   return (
+    //title should be moved outside to homepage
     <Box className="MediaRow">
-      <Typography variant="h2" sx={{ color: "white" }}>
-        {title}
-      </Typography>
-      <Box sx={{ display: "flex", columnGap: "1.5rem" }}>
+      <Box sx={{ display: "flex", columnGap: "1.5rem", width: "100%" }}>
         {movies.map((movie) => (
           <Paper elevation={12}>
             <MovieCard
@@ -22,7 +20,6 @@ function MediaRow({ title, movies }) {
               key={uuidv4()}
               img={`${imgUrl}${movie.backdrop_path}`}
               id={movie.id}
-              
             />
           </Paper>
         ))}

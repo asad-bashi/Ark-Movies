@@ -28,6 +28,7 @@ function Footer() {
       <ul className="List">
         <li className="List-Title">Follow Us</li>
         <div className="Socials">
+          {/*make icons smaller */}
           <FacebookIcon
             className="Icon"
             sx={{ fontSize: "2.5rem", color: "#b71c1c" }}

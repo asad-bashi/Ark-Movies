@@ -57,6 +57,8 @@
   margin: 0 auto;
   display: flex;
   gap: 2rem;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 .Movie-Title {
@@ -104,6 +106,7 @@
 .Movie-Video {
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 2.5rem;
 }
 .Trailer {
   color: white;
@@ -120,4 +123,13 @@
   display: flex;
   column-gap: 0.75rem;
   align-items: center;
+}
+
+.css-1c99szj-MuiRating-icon {
+  color: #b71c1c !important;
+}
+
+
+.Rating-Container{
+  margin-top: 2rem;
 }

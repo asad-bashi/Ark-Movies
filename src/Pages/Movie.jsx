@@ -1,26 +1,16 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Box, Typography, Button } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import Footer from "../Components/Footer";
+import { Box, Rating } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import "../Components/MovieBackDrop";
 import "./Movie.css";
 import MovieBackDrop from "../Components/MovieBackDrop";
 import Genre from "../Components/Genre";
-import CastMember from "../Components/CastMember";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from "react-html-parser";
 import Navbar from "../Components/Navbar";
-
-const API_KEY = "9f3a9d362ac316e4573a58e1556d4bfe";
-const BASE_URL = "https://api.themoviedb.org/3";
 
 function Movie({ setWatchList, watchList }) {
   const { id } = useParams();
@@ -32,12 +22,10 @@ function Movie({ setWatchList, watchList }) {
   const [isWatchListed, setWatchListed] = useState(false);
 
   useEffect(() => {
-    //have language filter
     async function getImages() {
       const { data } = await axios.get(
-        `${BASE_URL}/movie/${id}/images?api_key=${API_KEY}`
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/images?api_key=${process.env.REACT_APP_API_KEY}&include_image_language=en,null`
       );
-
       setBackdrop(data.backdrops[0]);
       setPoster(data.posters[0]);
     }
@@ -45,18 +33,17 @@ function Movie({ setWatchList, watchList }) {
 
     async function getMovieDetails() {
       const { data } = await axios.get(
-        `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`
       );
-
+      console.log(data);
       setMovie(data);
     }
     getMovieDetails();
 
     async function getCast() {
       const { data } = await axios.get(
-        `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}`
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}`
       );
-
       let cast = [];
       //grab first 5 cast members
       for (let i = 0; i < 5; i++) {
@@ -68,14 +55,20 @@ function Movie({ setWatchList, watchList }) {
 
     async function getVideos() {
       const { data } = await axios.get(
-        `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}`
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`
       );
-
       const videoKey = data.results[0].key;
-
       setVideo(videoKey);
     }
     getVideos();
+
+    async function getRecommended() {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
+      );
+      console.log(data);
+    }
+    getRecommended();
 
     function isWatchListed() {
       const isValid = watchList.some((movie) => movie.id === parseInt(id));
@@ -100,24 +93,13 @@ function Movie({ setWatchList, watchList }) {
 
   return (
     <div className="Movie">
-      {/*replace box with div classname movie */}
-      {/* fix Header.jsx and include it here */}
-
-      {/*use original size for backdrop and have it behind content */}
-      {/* <div className="Movie-BackDrop">
-        <img
-          height={"850px"}
-          src={`https://image.tmdb.org/t/p/w500/${backdrop?.file_path}`} //use poster but keep backdrop naming
-        />
-      </div> */}
       <Navbar />
-
+      {/*add overlay over backdrop black tint */}
       <MovieBackDrop file_path={backdrop?.file_path} />
-
       <section className="Movie-Information">
         <div className="Movie-Poster">
           <img
-            src={`https://image.tmdb.org/t/p/w500/${poster?.file_path}`}
+            src={`${process.env.REACT_APP_IMG_URL}w500/${poster?.file_path}`}
             alt=""
           />
         </div>
@@ -149,11 +131,17 @@ function Movie({ setWatchList, watchList }) {
                 onClick={addToWatchList}
               />
             )}
-
-            {/* <AddCircleIcon
-              sx={{ color: "#b71c1c", fontSize: "3.7rem", ml: ".5rem" }}
-            /> */}
           </div>
+          <div className="Rating-Container">
+            <Rating
+              sx={{ fontSize: "3rem" }}
+              size="large"
+              precision={0.1}
+              readOnly
+              value={movie.vote_average / 2}
+            />
+          </div>
+
           <p className="Movie-OverView">{movie.overview}</p>
 
           <h2 className="Movie-Cast-Title">Casts</h2>
@@ -181,7 +169,7 @@ function Movie({ setWatchList, watchList }) {
           allowFullScreen
         ></iframe>
       </section>
-      {/* include footer here */}
+      <Footer />
     </div>
   );
 }

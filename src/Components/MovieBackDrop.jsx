@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import apiConfig from "../apiConfig";
-const baseUrl = apiConfig.images.base_url;
 const imgSize = "original";
 
 const MovieBackDrop = styled.div`
-  background-image: url(${(props) => `${baseUrl}${imgSize}${props.file_path}`});
+  background-image: url(${(props) =>
+    `${process.env.REACT_APP_IMG_URL}${imgSize}${props.file_path}`});
   height: 600px;
   width: 100%;
   margin: 0 auto;

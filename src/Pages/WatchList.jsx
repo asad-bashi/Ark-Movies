@@ -1,14 +1,14 @@
 import Navbar from "../Components/Navbar";
 import MovieCard from "../Components/MovieCard";
-import { v4 as uuidv4 } from "uuid";
 import Footer from "../Components/Footer";
-
+import { v4 as uuidv4 } from "uuid";
+import { useEffect } from "react";
 import "./WatchList.css";
-import apiConfig from "../apiConfig";
-const baseUrl = apiConfig.images.base_url;
 const imgSize = "original";
 function WatchList(props) {
-
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    });
   return (
     <div className="WatchList">
       <Navbar />
@@ -16,10 +16,15 @@ function WatchList(props) {
         <h2 className="WatchList-Title">WatchList</h2>
         <div className="WatchList-Movies">
           {props.watchlist.map((movie) => (
-            <MovieCard key={uuidv4()} id={movie.id} img={`${baseUrl}${imgSize}/${movie.backdrop_path}`} />
+            <MovieCard
+              key={uuidv4()}
+              id={movie.id}
+              img={`${process.env.REACT_APP_BASE_URL}${imgSize}/${movie.backdrop_path}`}
+            />
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

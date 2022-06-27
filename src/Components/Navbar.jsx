@@ -1,5 +1,6 @@
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Navbar() {
   return (

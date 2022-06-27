@@ -1,12 +1,12 @@
 .WatchList {
   background-color: hsl(0, 0%, 8%);
-  min-height: 100vh;
+  
 }
 
 .WatchList-Container {
   width: 80%;
-  
   margin: 0 auto;
+  min-height: 100vh;
 }
 
 .WatchList-Title {
@@ -22,5 +22,6 @@
   width: 80%;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 1.5rem;
+  column-gap: 2rem;
+  row-gap: 3rem;
 }
