@@ -11,6 +11,7 @@ import "./Movie.css";
 import MovieBackDrop from "../Components/MovieBackDrop";
 import Genre from "../Components/Genre";
 import Navbar from "../Components/Navbar";
+import MediaRow from "../Components/MediaRow";
 
 function Movie({ setWatchList, watchList }) {
   const { id } = useParams();
@@ -19,6 +20,7 @@ function Movie({ setWatchList, watchList }) {
   const [movie, setMovie] = useState({});
   const [cast, setCast] = useState([]);
   const [video, setVideo] = useState([]);
+  const [similar, setSimilar] = useState([]);
   const [isWatchListed, setWatchListed] = useState(false);
   const imgSize = "w500";
 
@@ -36,7 +38,6 @@ function Movie({ setWatchList, watchList }) {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`
       );
-      console.log(data);
       setMovie(data);
     }
     getMovieDetails();
@@ -63,17 +64,16 @@ function Movie({ setWatchList, watchList }) {
     }
     getVideos();
 
-    async function getRecommended() {
+    async function getSimilarMovies() {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}`
       );
-      console.log(data);
+      setSimilar(data.results);
     }
-    getRecommended();
+    getSimilarMovies();
 
     function isWatchListed() {
       const isValid = watchList.some((movie) => movie.id === parseInt(id));
-      console.log(isValid);
       setWatchListed(isValid);
     }
     isWatchListed();
@@ -169,6 +169,10 @@ function Movie({ setWatchList, watchList }) {
           allowFullScreen
         ></iframe>
       </section>
+      <p className="MediaRow-Title">Similar Movies</p>
+      <div className="MediaRow-Container">
+        <MediaRow movies={similar} />
+      </div>
       <Footer />
     </div>
   );

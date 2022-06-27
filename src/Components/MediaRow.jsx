@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard";
 import { v4 as uuidv4 } from "uuid";
 import "./MediaRow.css";
 
-function MediaRow({ title, movies }) {
+function MediaRow({ movies }) {
   const imgSize = "w500";
   return (
     //title should be moved outside to homepage

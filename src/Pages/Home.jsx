@@ -16,7 +16,6 @@ function Home() {
   const [upComing, setUpComing] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(process.env)
     async function getMovies() {
       const nowPlaying = await axios.get(
         `${process.env.REACT_APP_BASE_URL}movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}`
@@ -60,11 +59,11 @@ function Home() {
         {/* fix title for each MediaRow on scroll */}
 
         <p className="MediaRow-Title">Popular</p>
-        <MediaRow title="Popular" movies={popular} />
+        <MediaRow movies={popular} />
         <p className="MediaRow-Title">Top Rated</p>
-        <MediaRow title="Top Rated" movies={topRated} />
+        <MediaRow movies={topRated} />
         <p className="MediaRow-Title">Up Coming</p>
-        <MediaRow title="Up Coming" movies={upComing} />
+        <MediaRow movies={upComing} />
       </div>
 
       <Footer />
