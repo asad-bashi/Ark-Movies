@@ -7,4 +7,17 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: #616161 hsl(0, 0%, 8%);
+}
+::-webkit-scrollbar {
+  height: 17px;
+  width: 17px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #616161;
 }
