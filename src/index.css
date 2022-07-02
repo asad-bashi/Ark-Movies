@@ -21,3 +21,7 @@ html {
 ::-webkit-scrollbar-thumb {
   background: #616161;
 }
+
+body{
+  overflow-x: hidden;
+}

@@ -7,6 +7,7 @@ const MovieCardContainer = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   width: 375px;
+
   height: 200px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   transition: 200ms ease-in-out;
@@ -17,10 +18,11 @@ const MovieCardContainer = styled.div`
   }
 `;
 
-function MovieCard({id,img}){
+function MovieCard({ id, img }) {
   const navigate = useNavigate();
-  return <MovieCardContainer img={img} onClick={() => navigate(`/movie/${id}`)} />
-
+  return (
+    <MovieCardContainer img={img} onClick={() => navigate(`/movie/${id}`)} />
+  );
 }
 
 export default MovieCard;
