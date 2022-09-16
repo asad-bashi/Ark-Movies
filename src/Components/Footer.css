@@ -1,7 +1,7 @@
 .Footer {
   background-color: black;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   padding: 4rem 6rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   margin-top: auto;
@@ -13,6 +13,7 @@
 @media (max-width: 550px) {
   .Footer {
     flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -20,21 +21,24 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  row-gap: 0.55rem;
+  row-gap: 0.35rem;
+  width: 150px;
 }
 
 .List-Title {
+  margin: 0 auto;
   font-weight: 500;
   width: fit-content;
   color: #eeeeee;
-  border-bottom: 3px solid #b71c1c;
+  border-bottom: 2px solid #b71c1c;
   border-radius: 2px;
   list-style-type: none;
   font-size: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.35rem;
 }
 
 .List-Item {
+  margin: 0 auto;
   color: #757575;
   font-size: 1rem;
   font-weight: 400;

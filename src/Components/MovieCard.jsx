@@ -14,7 +14,7 @@ const MovieCardContainer = styled.div`
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
-    border: 4px solid #b71c1c;
+    border: 3px solid #b71c1c;
   }
 `;
 

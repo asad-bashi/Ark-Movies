@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "../Components/Footer";
-import { Box, Rating } from "@mui/material";
+import { Box, Rating, Snackbar, Stack } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -12,6 +12,7 @@ import MovieBackDrop from "../Components/MovieBackDrop";
 import Genre from "../Components/Genre";
 import Navbar from "../Components/Navbar";
 import MediaRow from "../Components/MediaRow";
+import ReviewCard from "../Components/ReviewCard";
 
 function Movie({ setWatchList, watchList }) {
   const { id } = useParams();
@@ -20,8 +21,11 @@ function Movie({ setWatchList, watchList }) {
   const [movie, setMovie] = useState({});
   const [cast, setCast] = useState([]);
   const [video, setVideo] = useState([]);
-  const [similar, setSimilar] = useState([]);
+  const [recommended, setRecommended] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [isWatchListed, setWatchListed] = useState(false);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const imgSize = "w500";
 
   useEffect(() => {
@@ -41,7 +45,6 @@ function Movie({ setWatchList, watchList }) {
       setMovie(data);
     }
     getMovieDetails();
-
     async function getCast() {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}`
@@ -49,7 +52,9 @@ function Movie({ setWatchList, watchList }) {
       let cast = [];
       //grab first 5 cast members
       for (let i = 0; i < 5; i++) {
-        cast.push(data.cast[i]);
+        if (data.cast[i]) {
+          cast.push(data.cast[i]);
+        }
       }
       setCast(cast);
     }
@@ -66,11 +71,21 @@ function Movie({ setWatchList, watchList }) {
 
     async function getSimilarMovies() {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/movie/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}`
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
       );
-      setSimilar(data.results);
+      setRecommended(data.results);
     }
     getSimilarMovies();
+
+    async function getReviews() {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/reviews?api_key=${process.env.REACT_APP_API_KEY}`
+      );
+      setReviews(data.results);
+
+      //setReviews(data);
+    }
+    getReviews();
 
     function isWatchListed() {
       const isValid = watchList.some((movie) => movie.id === parseInt(id));
@@ -83,15 +98,25 @@ function Movie({ setWatchList, watchList }) {
   }, [id]);
 
   function addToWatchList() {
+    setIsSnackbarOpen(true);
+    setSnackbarMessage("Movie added to watchlist");
     setWatchList((prevWatchList) => [...prevWatchList, movie]);
     setWatchListed(true);
   }
 
   function removeFromWatchList() {
+    setIsSnackbarOpen(true);
+    setSnackbarMessage("Movie removed from watchlist");
     const newWatchList = watchList.filter((movie) => movie.id !== parseInt(id));
     setWatchList(newWatchList);
   }
 
+  function handleSnackbarClose(e, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+    setIsSnackbarOpen(false);
+  }
   return (
     <div className="Movie">
       <Navbar />
@@ -150,7 +175,7 @@ function Movie({ setWatchList, watchList }) {
               <div key={uuidv4()} className="Cast-Member">
                 <img
                   className="Movie-CastMember"
-                  src={`https://image.tmdb.org/t/p/w500/${c.profile_path}`}
+                  src={`https://image.tmdb.org/t/p/w500/${c?.profile_path}`}
                   alt=""
                 />
                 <p className="Cast-Member-Name">{c.name}</p>
@@ -169,10 +194,36 @@ function Movie({ setWatchList, watchList }) {
           allowFullScreen
         ></iframe>
       </section>
-      <p className="MediaRow-Title">Similar Movies</p>
-      <div className="MediaRow-Container">
-        <MediaRow movies={similar} />
-      </div>
+      <Stack width="90%" mx="auto">
+        <p className="Review-Title">Reviews</p>
+        <section className="Review-Container">
+          {reviews[0] ? (
+            reviews.map(({ author_details, content }) => {
+              return (
+                <ReviewCard
+                  details={author_details}
+                  content={content}
+                  key={uuidv4()}
+                />
+              );
+            })
+          ) : (
+            <p className="review-missing">No reviews at this time</p>
+          )}
+        </section>
+      </Stack>
+
+      <section className="MediaRow-Container">
+        <p className="MediaRow-Title">Recommended Movies</p>
+        <MediaRow movies={recommended} />
+      </section>
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={3000}
+        message={snackbarMessage}
+        onClose={handleSnackbarClose}
+      />
+
       <Footer />
     </div>
   );
