@@ -22,6 +22,7 @@ function Movie({ setWatchList, watchList }) {
   const [cast, setCast] = useState([]);
   const [video, setVideo] = useState([]);
   const [recommended, setRecommended] = useState([]);
+  const [similar, setSimilar] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [isWatchListed, setWatchListed] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
@@ -69,11 +70,19 @@ function Movie({ setWatchList, watchList }) {
     }
     getVideos();
 
-    async function getSimilarMovies() {
+    async function getRecommendedMovies() {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/movie/${id}/recommendations?api_key=${process.env.REACT_APP_API_KEY}`
       );
       setRecommended(data.results);
+    }
+    getRecommendedMovies();
+
+    async function getSimilarMovies() {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/movie/${id}/similar?api_key=${process.env.REACT_APP_API_KEY}`
+      );
+      setSimilar(data.results);
     }
     getSimilarMovies();
 
@@ -215,7 +224,7 @@ function Movie({ setWatchList, watchList }) {
 
       <section className="MediaRow-Container">
         <p className="MediaRow-Title">Recommended Movies</p>
-        <MediaRow movies={recommended} />
+        <MediaRow movies={recommended.length ? recommended : similar} />
       </section>
       <Snackbar
         open={isSnackbarOpen}

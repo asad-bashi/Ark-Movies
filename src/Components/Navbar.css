@@ -36,7 +36,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  row-gap: .55rem;
+  row-gap: 0.55rem;
   padding: 1rem;
 }
 

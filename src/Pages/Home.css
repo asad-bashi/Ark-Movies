@@ -19,35 +19,41 @@
   padding: 0.75rem;
 }
 
-
 .rec.rec-carousel {
   width: 100%;
 }
 
-.eWjCzc {
+/*right arrow */
+.rec-arrow-right {
   background-color: black !important;
   color: white !important;
   transition: 200ms ease-in !important;
 }
-
-.eWjCzc:hover:enabled,
-.eWjCzc:focus:enabled {
-  color: black !important;
-  background-color: #b71c1c !important;
-  box-shadow: 0 0 2px 0 #333 !important;
-}
-.eAyARa {
+.rec-arrow-left {
   background-color: black !important;
   color: white !important;
 }
 
-.krmNah {
+.rec-arrow-right:hover:enabled,
+.rec-arrow-right:focus:enabled {
+  color: black !important;
+  background-color: #b71c1c !important;
+  box-shadow: 0 0 2px 0 #333 !important;
+}
+.rec-arrow-left:hover:enabled,
+.rec-arrow-left:focus:enabled {
+  color: black !important;
+  background-color: #b71c1c !important;
+  box-shadow: 0 0 2px 0 #333 !important;
+}
+
+.rec-dot_active {
   background-color: #b71c1c !important;
   box-shadow: 0 0 1px 3px rgba(183, 28, 28, 1) !important;
 }
 
-.jhmYzC:hover,
-.jhmYzC:focus {
+.rec-dot:hover,
+.rec-dot:focus {
   cursor: pointer;
   box-shadow: 0 0 1px 3px rgba(183, 28, 28, 1) !important;
 }
