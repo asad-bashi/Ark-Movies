@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Carousel from "react-elastic-carousel";
+import styled from "styled-components";
 import "../Components/MoviePoster";
 import axios from "axios";
 import "./Home.css";
@@ -9,6 +10,13 @@ import { v4 as uuidv4 } from "uuid";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
+
+const CarouselContainer = styled.section`
+  margin: 1.5rem 0rem;
+  height: 100vh;
+  width: 100vw;
+`;
+
 function Home() {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [popular, setPopular] = useState([]);
@@ -42,22 +50,21 @@ function Home() {
 
   return (
     <div className="Home">
-      {/* replace box for div */}
       <Navbar />
 
-      <Carousel className="Carousel">
-        {nowPlaying.map(({ poster_path, id }) => (
-          <MoviePoster
-            onClick={() => navigate(`/movie/${id}`)}
-            key={uuidv4()}
-            poster_path={poster_path}
-          />
-        ))}
-      </Carousel>
+      <CarouselContainer>
+        <Carousel className="Carousel">
+          {nowPlaying.map(({ poster_path, id }) => (
+            <MoviePoster
+              onClick={() => navigate(`/movie/${id}`)}
+              key={uuidv4()}
+              poster_path={poster_path}
+            />
+          ))}
+        </Carousel>
+      </CarouselContainer>
 
       <div className="MediaRow-Container">
-        {/* fix title for each MediaRow on scroll */}
-
         <p className="MediaRow-Title">Popular</p>
         <MediaRow movies={popular} />
         <p className="MediaRow-Title">Top Rated</p>

@@ -1,22 +1,31 @@
 import styled from "styled-components";
-import { Rating } from "@mui/material";
+import { Rating, Stack } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Card = styled.article`
   color: #eeeeee;
   display: flex;
   flex-direction: column;
+  width: 100%;
   background-color: black;
   border: 2px solid #b71c1c;
   padding: 0.75rem 1.4rem;
   row-gap: 0.55rem;
-  width: 500px;
-  height: fit-content;
 `;
 
 function ReviewCard({ details, content }) {
   return (
     <Card>
-      <p>{details.username}</p>
+      <Stack
+        alignItems="center"
+        width="fit-content"
+        columnGap={3}
+        direction="row"
+      >
+        <AccountCircleIcon sx={{ fontSize: 35 }} />
+
+        <p>{details.username}</p>
+      </Stack>
       <Rating
         size="large"
         precision={0.1}

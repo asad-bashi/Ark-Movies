@@ -1,34 +1,14 @@
 import styled from "styled-components";
 const imgSize = "original";
 const MoviePoster = styled.div`
-  width: 37vw;
+  width: 100%;
   height: 100vh;
   background-image: url(${(props) =>
     `${process.env.REACT_APP_IMG_URL}${imgSize}${props.poster_path}`});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: contain;
   cursor: pointer;
-
-  @media (max-width: 700px) {
-    width: 100%;
-  }
-
-  @media (min-width: 701px) and (max-width: 791px) {
-    width: 90%;
-  }
-
-  @media (min-width: 792px) and (max-width: 877px) {
-    width: 80%;
-  }
-
-  @media (min-width: 878px) and (max-width: 984px) {
-    width: 70%;
-  }
-
-  @media (min-width: 985px) and (max-width: 1150px) {
-    width: 60%;
-  }
 `;
 
 export default MoviePoster;

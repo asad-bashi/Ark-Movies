@@ -1,6 +1,5 @@
 .WatchList {
   background-color: hsl(0, 0%, 8%);
-  
 }
 
 .WatchList-Container {
@@ -10,7 +9,7 @@
 }
 
 .WatchList-Title {
-  color: white;
+  color: #eeeeee;
   font-size: 3.5rem;
   text-align: center;
   margin: 1.55rem 0;
@@ -18,10 +17,16 @@
 
 .WatchList-Movies {
   margin: 0 auto;
-
   width: 80%;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   column-gap: 2rem;
   row-gap: 3rem;
+}
+
+.WatchList-p {
+  color: #eeeeee;
+  text-align: center;
+  font-size: 1.5rem;
 }

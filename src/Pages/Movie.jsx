@@ -27,7 +27,7 @@ function Movie({ setWatchList, watchList }) {
   const [isWatchListed, setWatchListed] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const imgSize = "w500";
+  const imgSize = "original";
 
   useEffect(() => {
     async function getImages() {
