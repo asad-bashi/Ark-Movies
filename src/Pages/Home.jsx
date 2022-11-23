@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Carousel from "react-elastic-carousel";
 import styled from "styled-components";
-import "../Components/MoviePoster";
 import axios from "axios";
 import "./Home.css";
 import MoviePoster from "../Components/MoviePoster";

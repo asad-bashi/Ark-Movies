@@ -50,14 +50,16 @@ function Movie({ setWatchList, watchList }) {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}`
       );
-      let cast = [];
-      //grab first 5 cast members
-      for (let i = 0; i < 5; i++) {
-        if (data.cast[i]) {
-          cast.push(data.cast[i]);
+
+      //filter out the cast members that don't have poster image
+      const cast = data.cast.filter((person) => {
+        if (person.profile_path) {
+          return person;
         }
-      }
-      setCast(cast);
+      });
+
+      //setting cast state to only hold 5 people
+      setCast(cast.slice(0, 5));
     }
     getCast();
 
